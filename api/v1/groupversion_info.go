@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2018 Martin Linkhorst
+Copyright (c) 2021 Stephen Cuppett
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Package v1beta1 contains API Schema definitions for the v1beta1 API group
-// +kubebuilder:object:generate=true
-// +groupName=cloudformation.cuppett.com
-package v1beta1
+// Package v1 contains API Schema definitions for the cloudformation v1 API group
+//+kubebuilder:object:generate=true
+//+groupName=cloudformation.cuppett.com
+package v1
 
 import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -34,7 +35,7 @@ import (
 
 var (
 	// GroupVersion is group version used to register these objects
-	GroupVersion = schema.GroupVersion{Group: "cloudformation.cuppett.com", Version: "v1beta1"}
+	GroupVersion = schema.GroupVersion{Group: "cloudformation.cuppett.com", Version: "v1"}
 
 	// SchemeBuilder is used to add go types to the GroupVersionKind scheme
 	SchemeBuilder = &scheme.Builder{GroupVersion: GroupVersion}

@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2018 Martin Linkhorst
+Copyright (c) 2021 Stephen Cuppett
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package v1beta1
+package v1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -30,7 +31,6 @@ import (
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-// Important: Run "make" to regenerate code after modifying this file
 
 // Defines the desired state of Stack
 type StackSpec struct {

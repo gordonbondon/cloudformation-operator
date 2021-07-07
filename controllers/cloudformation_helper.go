@@ -31,7 +31,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cfTypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
-	"github.com/cuppett/cloudformation-operator/api/v1beta1"
+	"github.com/cuppett/cloudformation-controller/api/v1"
 	"strings"
 )
 
@@ -55,7 +55,7 @@ func (cf *CloudFormationHelper) StackInTerminalState(status cfTypes.StackStatus)
 	return false
 }
 
-func (cf *CloudFormationHelper) GetStack(ctx context.Context, instance *v1beta1.Stack) (*cfTypes.Stack, error) {
+func (cf *CloudFormationHelper) GetStack(ctx context.Context, instance *v1.Stack) (*cfTypes.Stack, error) {
 	// Must use the stack ID to get details/finalization for deleted stacks
 	name := instance.Status.StackID
 	if name == "" {
@@ -78,11 +78,11 @@ func (cf *CloudFormationHelper) GetStack(ctx context.Context, instance *v1beta1.
 	return &resp.Stacks[0], nil
 }
 
-func (cf *CloudFormationHelper) GetStackResources(ctx context.Context, stackId string) ([]v1beta1.StackResource, error) {
+func (cf *CloudFormationHelper) GetStackResources(ctx context.Context, stackId string) ([]v1.StackResource, error) {
 
 	var next *string
 	next = nil
-	toReturn := make([]v1beta1.StackResource, 0)
+	toReturn := make([]v1.StackResource, 0)
 
 	for {
 		resp, err := cf.CloudFormation.ListStackResources(ctx, &cloudformation.ListStackResourcesInput{
@@ -103,7 +103,7 @@ func (cf *CloudFormationHelper) GetStackResources(ctx context.Context, stackId s
 				physicalID = *e.PhysicalResourceId
 			}
 
-			resourceSummary := v1beta1.StackResource{
+			resourceSummary := v1.StackResource{
 				LogicalId:    *e.LogicalResourceId,
 				PhysicalId:   physicalID,
 				Type:         *e.ResourceType,

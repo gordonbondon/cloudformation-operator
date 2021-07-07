@@ -58,7 +58,7 @@ No resources found.
 Let's create a simple one that manages an S3 bucket:
 
 ```yaml
-apiVersion: cloudformation.cuppett.com/v1beta1
+apiVersion: cloudformation.cuppett.com/v1
 kind: Stack
 metadata:
   name: my-bucket
@@ -112,7 +112,7 @@ Voilà, you just created a CloudFormation stack by only talking to Kubernetes.
 You can also update your stack: Let's change the `VersioningConfiguration` from `Suspended` to `Enabled`:
 
 ```yaml
-apiVersion: cloudformation.cuppett.com/v1beta1
+apiVersion: cloudformation.cuppett.com/v1
 kind: Stack
 metadata:
   name: my-bucket
@@ -152,7 +152,7 @@ Current operator provides two ways to assign tags:
 - `tags` parameter at kubernetes resource spec:
 
 ```yaml
-apiVersion: cloudformation.cuppett.com/v1beta1
+apiVersion: cloudformation.cuppett.com/v1
 kind: Stack
 metadata:
   name: my-bucket
@@ -187,7 +187,7 @@ so that your template itself doesn't change that often and, well, is really a *t
 Let's extract the `VersioningConfiguration` into a parameter:
 
 ```yaml
-apiVersion: cloudformation.cuppett.com/v1beta1
+apiVersion: cloudformation.cuppett.com/v1
 kind: Stack
 metadata:
   name: my-bucket
@@ -239,7 +239,7 @@ In our example, we don't define a particular S3 bucket name but instead let AWS 
 Let's change our CloudFormation template to expose the generated bucket name via an `Output`:
 
 ```yaml
-apiVersion: cloudformation.cuppett.com/v1beta1
+apiVersion: cloudformation.cuppett.com/v1
 kind: Stack
 metadata:
   name: my-bucket

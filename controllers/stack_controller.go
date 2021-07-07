@@ -27,7 +27,7 @@ package controllers
 
 import (
 	"context"
-	"github.com/cuppett/cloudformation-operator/api/v1beta1"
+	v1 "github.com/cuppett/cloudformation-controller/api/v1"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"strings"
@@ -67,7 +67,7 @@ type StackReconciler struct {
 type StackLoop struct {
 	ctx      context.Context
 	req      ctrl.Request
-	instance *v1beta1.Stack
+	instance *v1.Stack
 	stack    *cfTypes.Stack
 }
 
@@ -83,7 +83,7 @@ type StackLoop struct {
 func (r *StackReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = r.Log.WithValues("Request.Namespace", req.Namespace, "Request.Name", req.Name)
 
-	loop := &StackLoop{ctx, req, &v1beta1.Stack{}, nil}
+	loop := &StackLoop{ctx, req, &v1.Stack{}, nil}
 
 	// Fetch the Stack instance
 	err := r.Client.Get(loop.ctx, loop.req.NamespacedName, loop.instance)
@@ -383,6 +383,6 @@ func (r *StackReconciler) stackTags(loop *StackLoop) ([]cfTypes.Tag, error) {
 // SetupWithManager sets up the controller with the Manager.
 func (r *StackReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&v1beta1.Stack{}).
+		For(&v1.Stack{}).
 		Complete(r)
 }

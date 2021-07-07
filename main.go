@@ -49,8 +49,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	cloudformationv1beta1 "github.com/cuppett/cloudformation-operator/api/v1beta1"
-	"github.com/cuppett/cloudformation-operator/controllers"
+	cloudformationv1 "github.com/cuppett/cloudformation-controller/api/v1"
+	"github.com/cuppett/cloudformation-controller/controllers"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -63,7 +63,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(cloudformationv1beta1.AddToScheme(scheme))
+	utilruntime.Must(cloudformationv1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 
 	StackFlagSet = pflag.NewFlagSet("stack", pflag.ExitOnError)
@@ -176,7 +176,7 @@ func main() {
 	stackFollower := &controllers.StackFollower{
 		Client:               mgr.GetClient(),
 		Log:                  ctrl.Log.WithName("workers").WithName("Stack"),
-		SubmissionChannel:    make(chan *cloudformationv1beta1.Stack),
+		SubmissionChannel:    make(chan *cloudformationv1.Stack),
 		CloudFormationHelper: cfHelper,
 	}
 	go stackFollower.Receiver()

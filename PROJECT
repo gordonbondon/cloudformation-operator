@@ -4,16 +4,16 @@ layout:
 plugins:
   manifests.sdk.operatorframework.io/v2: {}
   scorecard.sdk.operatorframework.io/v2: {}
-projectName: cloudformation-operator
-repo: github.com/cuppett/cloudformation-operator
+projectName: cloudformation-controller
+repo: github.com/cuppett/cloudformation-controller
 resources:
-9942
 - api:
     crdVersion: v1
     namespaced: true
+  controller: true
   domain: cuppett.com
   group: cloudformation
   kind: Stack
-  path: github.com/cuppett/cloudformation-operator/api/v1beta1
-  version: v1beta1
+  path: github.com/cuppett/cloudformation-controller/api/v1
+  version: v1
 version: "3"

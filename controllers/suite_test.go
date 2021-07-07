@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2018 Martin Linkhorst
+Copyright (c) 2021 Stephen Cuppett
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,8 +39,8 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	cloudformationv1beta1 "github.com/cuppett/cloudformation-operator/api/v1beta1"
-	// +kubebuilder:scaffold:imports
+	cloudformationv1 "github.com/cuppett/cloudformation-controller/api/v1"
+	//+kubebuilder:scaffold:imports
 )
 
 // These tests use Ginkgo (BDD-style Go testing framework). Refer to
@@ -62,20 +63,18 @@ var _ = BeforeSuite(func() {
 
 	By("bootstrapping test environment")
 	testEnv = &envtest.Environment{
-		CRDDirectoryPaths: []string{filepath.Join("..", "config", "crd", "bases")},
+		CRDDirectoryPaths:     []string{filepath.Join("..", "config", "crd", "bases")},
+		ErrorIfCRDPathMissing: true,
 	}
 
 	cfg, err := testEnv.Start()
 	Expect(err).NotTo(HaveOccurred())
 	Expect(cfg).NotTo(BeNil())
 
-	err = cloudformationv1beta1.AddToScheme(scheme.Scheme)
+	err = cloudformationv1.AddToScheme(scheme.Scheme)
 	Expect(err).NotTo(HaveOccurred())
 
-	err = cloudformationv1beta1.AddToScheme(scheme.Scheme)
-	Expect(err).NotTo(HaveOccurred())
-
-	// +kubebuilder:scaffold:scheme
+	//+kubebuilder:scaffold:scheme
 
 	k8sClient, err = client.New(cfg, client.Options{Scheme: scheme.Scheme})
 	Expect(err).NotTo(HaveOccurred())
