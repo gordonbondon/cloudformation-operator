@@ -1,6 +1,5 @@
 ## Append samples you want in your CSV to this file as resources ##
 resources:
-- s3-bucket.yaml
 - cloudfront-cdn.yaml
 - s3-bucket.yaml
 - sqs-queue.yaml

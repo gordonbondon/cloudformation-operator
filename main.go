@@ -84,8 +84,8 @@ func main() {
 	flag.StringVar(&metricsAddr, "metrics-bind-address", ":8080", "The address the metric endpoint binds to.")
 	flag.StringVar(&probeAddr, "health-probe-bind-address", ":8081", "The address the probe endpoint binds to.")
 	flag.BoolVar(&enableLeaderElection, "leader-elect", false,
-		"Enable leader election for controller manager. "+
-			"Enabling this will ensure there is only one active controller manager.")
+		"Enable leader election for controller controller. "+
+			"Enabling this will ensure there is only one active controller controller.")
 	opts := zap.Options{
 		Development: true,
 	}
@@ -112,7 +112,7 @@ func main() {
 	}
 	// Add support for MultiNamespace set in WATCH_NAMESPACE (e.g ns1,ns2)
 	if strings.Contains(namespace, ",") {
-		setupLog.Info("manager set up with multiple namespaces", "namespaces", namespace)
+		setupLog.Info("controller set up with multiple namespaces", "namespaces", namespace)
 		// configure cluster-scoped with MultiNamespacedCacheBuilder
 		options.Namespace = ""
 		options.NewCache = cache.MultiNamespacedCacheBuilder(strings.Split(namespace, ","))
@@ -120,7 +120,7 @@ func main() {
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), options)
 	if err != nil {
-		setupLog.Error(err, "unable to start manager")
+		setupLog.Error(err, "unable to start controller")
 		os.Exit(1)
 	}
 
@@ -207,9 +207,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	setupLog.Info("starting manager")
+	setupLog.Info("starting controller")
 	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {
-		setupLog.Error(err, "problem running manager")
+		setupLog.Error(err, "problem running controller")
 		os.Exit(1)
 	}
 }
