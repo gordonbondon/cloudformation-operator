@@ -46,8 +46,8 @@ spec:
                 type: object
               template:
                 type: string
-            required:
-            - template
+              templateUrl:
+                type: string
             type: object
           status:
             description: Defines the observed state of Stack
