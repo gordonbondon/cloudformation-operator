@@ -60,10 +60,10 @@ type StackStatus struct {
 	StackStatus string `json:"stackStatus"`
 	// +kubebuilder:validation:Optional
 	// +optional
-	CreatedTime metav1.Time `json:"createdTime,omitempty"`
+	CreatedTime *metav1.Time `json:"createdTime,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +optional
-	UpdatedTime metav1.Time `json:"updatedTime,omitempty"`
+	UpdatedTime *metav1.Time `json:"updatedTime,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +optional
 	Outputs map[string]string `json:"outputs,omitempty"`
