@@ -36,6 +36,10 @@ import (
 // Defines the desired state of Stack
 type StackSpec struct {
 	// +kubebuilder:validation:Optional
+	// +kubebuilder:validation:Enum=DO_NOTHING;ROLLBACK;DELETE
+	// +optional
+	OnFailure string `json:"onFailure,omitempty"`
+	// +kubebuilder:validation:Optional
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 	// +kubebuilder:validation:Optional

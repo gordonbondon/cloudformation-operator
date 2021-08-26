@@ -206,6 +206,10 @@ func (r *StackReconciler) createStack(loop *StackLoop) error {
 		input.TemplateURL = aws.String(loop.instance.Spec.TemplateUrl)
 	}
 
+	if loop.instance.Spec.OnFailure != "" {
+		input.OnFailure = cfTypes.OnFailure(loop.instance.Spec.OnFailure)
+	}
+
 	output, err := r.CloudFormation.CreateStack(loop.ctx, input)
 	if err != nil {
 		return err
